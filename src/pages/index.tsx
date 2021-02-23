@@ -9,6 +9,7 @@ import { textBlock } from '../lib/notion/renderers'
 import getNotionUsers from '../lib/notion/getNotionUsers'
 import getBlogIndex from '../lib/notion/getBlogIndex'
 
+//9a09f4dad2594f23b92bcece8fa372cc
 export async function getStaticProps({ preview }) {
   const postsTable = await getBlogIndex()
 
@@ -59,7 +60,6 @@ export default ({ posts = [], preview }) => {
         </div>
       )}
       <div className={`${sharedStyles.layout} ${blogStyles.blogIndex}`}>
-        <h1>My Notion Blog</h1>
         {posts.length === 0 && (
           <p className={blogStyles.noPosts}>There are no posts yet</p>
         )}
@@ -80,7 +80,10 @@ export default ({ posts = [], preview }) => {
                 <div className="authors">By: {post.Authors.join(' ')}</div>
               )}
               {post.Date && (
-                <div className="posted">Posted: {getDateStr(post.Date)}</div>
+                <div className="posted">{getDateStr(post.Date)}</div>
+              )}
+              {post.Status.length > 0 && (
+                <div className="authors">Status: {post.Status}</div>
               )}
               <p>
                 {(!post.preview || post.preview.length === 0) &&
